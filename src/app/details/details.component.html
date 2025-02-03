@@ -1,0 +1,23 @@
+<article>
+    <img
+      class="listing-photo"
+      [src]="product.imageUrl"
+      alt="Exterior photo of {{ product?.name }}"
+      crossorigin
+    />
+    <section class="listing-description">
+      <h2 class="listing-heading">{{ product?.name }}</h2>
+      <p class="listing-location">{{ product?.brand }}, $ {{ product?.price }}</p>
+    </section>
+    <section class="listing-features">
+      <h2 class="section-heading">About this product</h2>
+      <h4 class="listing-about">{{ product?.description }}</h4>
+      <ul>
+        <li>Product available: {{ product?.productAvailable }}</li>
+        <li>Units available: {{ product?.stockQuantity }}</li>
+        <li>Released Date of product: {{ product?.releaseDate }}</li>
+        <li>Category of product: {{ product?.category }}</li>
+      </ul>
+    </section>
+   
+  </article>
