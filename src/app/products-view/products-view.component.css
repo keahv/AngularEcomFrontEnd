@@ -30,3 +30,14 @@
     margin-left: 5px;
   }
   
+  .container{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-delete{
+    padding: 5px;
+    margin-right: 10px;
+    background-color: red;
+    border-radius: 10px;
+  }

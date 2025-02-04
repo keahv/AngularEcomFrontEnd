@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Product } from '../product';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { ProductsViewComponent } from '../products-view/products-view.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ProductServiceService } from '../product-service.service';
 
 @Component({
   selector: 'app-home',
@@ -12,31 +13,47 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class HomeComponent {
 
+  service : ProductServiceService = inject(ProductServiceService);
+  
   constructor(private http: HttpClient) {
     this.getAllProducts();
-  } 
 
-  readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
+  } 
+ 
   productList: Product[] =[];
 
-  userList : any[] = [];
   getAllProducts() {
-    // debugger;
-    this.http.get("http://localhost:8080/api/products").subscribe((result:any)=>{
-      
-      this.productList = result;
-      //console.log(this.productList)
-    })
+    this.service.getAllProducts().subscribe((result:any)=>{
+    this.productList = result;
+    });
   }
 
 
   filterResults(keyword:string){
     const params = new HttpParams().set('keyword', keyword);
-     this.http.get<Product[]>("http://localhost:8080/api/products/search", { params }).subscribe((result:any)=>{
-      // debugger;
+     this.service.filterResults(keyword).subscribe((result:any)=>{
       this.productList = result;
-      console.log(this.productList)
+      if(this.productList.length == 0){
+        this.getAllProducts();
+      }
     });
   }
+
+  onDelete(id: number) {
+    debugger;
+    const isDelete=  confirm("Are you sure want to delete");
+    if(isDelete) {
+      this.service.deleteProduct(id).subscribe((res:any)=>{
+        debugger;
+        if(res.result) {
+          alert("Department Deleted Success");
+          this.getAllProducts();
+        } else {
+          alert(res.message)
+        }
+      })
+    }
    
+}
+
 }

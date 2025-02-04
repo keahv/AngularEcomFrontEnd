@@ -1,7 +1,8 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, Output } from '@angular/core';
 import { Product } from '../product';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { EventEmitter } from 'stream';
 
 
 @Component({
@@ -12,5 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsViewComponent {
   @Input() product!: Product;
+
+  
 
 }
