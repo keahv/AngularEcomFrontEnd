@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Product } from '../product';
 import { ProductServiceService } from '../product-service.service';
 
 @Component({
   selector: 'app-details',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterOutlet],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
@@ -31,20 +31,23 @@ export class DetailsComponent {
     }
 
     onDelete(id: number) {
-      debugger;
+        
       const isDelete=  confirm("Are you sure want to delete");
       if(isDelete) {
         this.service.deleteProduct(id).subscribe((res:any)=>{
-          debugger;
-          if(res.result) {
-            alert("Department Deleted Success");
+         console.log(res);
+         debugger;
+          if(res.status === "OK") {
+            debugger;
+             alert(res.message);
+             debugger;
             this.router.navigate(['/']);
           } else {
+            debugger;
             alert(res.message)
           }
-        })
-      }
-
-}
+        });
+     }
+  }
 
 }
