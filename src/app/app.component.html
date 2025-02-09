@@ -1,9 +1,16 @@
 <main>
-  <a [routerLink]="['/']">
-    <header class="brand-name">
+  <header class="brand-header">
+  
+    <a [routerLink]="['/']" class="brand-link">
       <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
-    </header>
-  </a>
+    </a>
+
+    <nav class="nav-links">
+      <a [routerLink]="['/addProduct']" class="add-product-link">Add Product</a>
+    </nav>
+
+  </header>
+  
   <section class="content">
     <router-outlet></router-outlet>
   </section>

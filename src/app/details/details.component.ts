@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Product } from '../product';
 import { ProductServiceService } from '../product-service.service';
 
 @Component({
   selector: 'app-details',
-  imports: [CommonModule,RouterOutlet],
+  imports: [CommonModule,RouterOutlet,RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
@@ -16,11 +16,12 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   service : ProductServiceService = inject(ProductServiceService);
   product : any = {};
-
+  id!:number;
   constructor(private http: HttpClient,private router: Router) {
     const productId = parseInt(this.route.snapshot.params['id'], 10);
     this.getProductById(productId);
-    console.log(productId);
+    this.id = productId;
+    console.log(this.id);
     };
 
 
@@ -49,5 +50,7 @@ export class DetailsComponent {
         });
      }
   }
+
+  
 
 }

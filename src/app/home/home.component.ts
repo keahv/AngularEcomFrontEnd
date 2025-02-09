@@ -7,33 +7,30 @@ import { ProductServiceService } from '../product-service.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,ProductsViewComponent],
+  imports: [CommonModule, ProductsViewComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  service: ProductServiceService = inject(ProductServiceService);
 
-  service : ProductServiceService = inject(ProductServiceService);
-  
   constructor(private http: HttpClient) {
     this.getAllProducts();
+  }
 
-  } 
- 
-  productList: Product[] =[];
+  productList: Product[] = [];
 
   getAllProducts() {
-    this.service.getAllProducts().subscribe((result:any)=>{
-    this.productList = result;
+    this.service.getAllProducts().subscribe((result: any) => {
+      this.productList = result;
     });
   }
 
-
-  filterResults(keyword:string){
+  filterResults(keyword: string) {
     const params = new HttpParams().set('keyword', keyword);
-     this.service.filterResults(keyword).subscribe((result:any)=>{
+    this.service.filterResults(keyword).subscribe((result: any) => {
       this.productList = result;
-      if(this.productList.length == 0){
+      if (this.productList.length == 0) {
         this.getAllProducts();
       }
     });
@@ -41,19 +38,17 @@ export class HomeComponent {
 
   onDelete(id: number) {
     debugger;
-    const isDelete=  confirm("Are you sure want to delete");
-    if(isDelete) {
-      this.service.deleteProduct(id).subscribe((res:any)=>{
+    const isDelete = confirm('Are you sure want to delete');
+    if (isDelete) {
+      this.service.deleteProduct(id).subscribe((res: any) => {
         debugger;
-        if(res.result) {
-          alert("Department Deleted Success");
+        if (res.result) {
+          alert('Department Deleted Success');
           this.getAllProducts();
         } else {
-          alert(res.message)
+          alert(res.message);
         }
-      })
+      });
     }
-   
-}
-
+  }
 }
