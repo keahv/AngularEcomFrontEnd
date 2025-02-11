@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { ProductsViewComponent } from '../products-view/products-view.component';
@@ -11,13 +11,14 @@ import { ProductServiceService } from '../product-service.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   service: ProductServiceService = inject(ProductServiceService);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
     this.getAllProducts();
   }
-
   productList: Product[] = [];
 
   getAllProducts() {
@@ -51,4 +52,7 @@ export class HomeComponent {
       });
     }
   }
+
+
+  
 }
