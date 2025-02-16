@@ -1,20 +1,35 @@
 <main>
   <header class="brand-header">
-  
     <a [routerLink]="['/']" class="brand-link">
-      <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
+      <img
+        class="brand-logo"
+        src="/assets/logo.svg"
+        alt="logo"
+        aria-hidden="true"
+      />
     </a>
 
     <nav class="nav-links">
       <a [routerLink]="['/addProduct']" class="add-product-link">Add Product</a>
     </nav>
-    
-    <nav class="nav-links" style="margin-left: 4px;">
-      <a [routerLink]="['/loginOrSignUp']" class="add-product-link">login/SignUp</a>
+
+    <nav class="nav-links" style="margin-left: 4px">
+      <a [routerLink]="['/loginOrSignUp']" class="add-product-link"
+        >login/SignUp</a
+      >
     </nav>
 
+    <a [routerLink]="['/cart']" class="add-product-link">
+      <img
+        src="/assets/cart.svg"
+        class="nav-links"
+        style="margin-left: 4px; margin-right: 5px"
+        alt="logo"
+        aria-hidden="true"
+      />
+    </a>
   </header>
-  
+
   <section class="content">
     <router-outlet></router-outlet>
   </section>

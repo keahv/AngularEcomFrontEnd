@@ -1,36 +1,55 @@
 <article>
-    <img
-      class="listing-photo"
-      [src]="product.imageUrl"
-      alt="Exterior photo of {{ product?.name }}"
-      crossorigin
-    />
-    <section class="listing-description">
-      <h2 class="listing-heading">{{ product?.name }}</h2>
-      <p class="listing-location">{{ product?.brand }}, $ {{ product?.price }}</p>
-    </section>
-    <section class="listing-features">
-      <h2 class="section-heading">About this product</h2>
-      <h4 class="listing-about">{{ product?.description }}</h4>
-      <ul>
-        <li>Product available: {{ product?.productAvailable }}</li>
-        <li>Units available: {{ product?.stockQuantity }}</li>
-        <li>Released Date of product: {{ product?.releaseDate }}</li>
-        <li>Category of product: {{ product?.category }}</li>
-      </ul>
-    </section>
-   
-    
+  <img
+    class="listing-photo"
+    [src]="product.imageUrl"
+    alt="Exterior photo of {{ product?.name }}"
+    crossorigin
+  />
+  <section class="listing-description">
+    <h2 class="listing-heading">{{ product?.name }}</h2>
+    <p class="listing-location">{{ product?.brand }}, $ {{ product?.price }}</p>
+  </section>
+  <section class="listing-features">
+    <h2 class="section-heading">About this product</h2>
+    <h4 class="listing-about">{{ product?.description }}</h4>
+    <ul>
+      <li>Product available: {{ product?.productAvailable }}</li>
+      <li>Units available: {{ product?.stockQuantity }}</li>
+      <li>Released Date of product: {{ product?.releaseDate }}</li>
+      <li>Category of product: {{ product?.category }}</li>
+    </ul>
+  </section>
 
-    <div class="brand-header">
-  
-      <div style="color: red;" class="add-product-link"  (click)="onDelete(product.id)">Delete Product</div>
-  
-      <div class="" style="margin-left: 4px;">
-        <a   [routerLink]="['/updateProduct',id]" class="add-product-link">Update Product</a>
-      </div>
-  
+  <div class="brand-header">
+    <div
+      style="color: red"
+      class="add-product-link"
+      (click)="onDelete(product.id)"
+    >
+      Delete Product
     </div>
 
-    <router-outlet></router-outlet>
-  </article>
+    <div
+      class="add-product-link"
+      style="
+        margin-left: 4px;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+      "
+      (click)="addToUsersCart()"
+    >
+      <img src="/assets/addToCart.svg" />
+      <span style="margin-left: 8px">Add Cart</span>
+    </div>
+    
+    <div class="" style="margin-left: 4px">
+      <a [routerLink]="['/updateProduct', id]" class="add-product-link"
+        >Update Product</a
+      >
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</article>

@@ -1,11 +1,15 @@
 <section>
   <form>
     <input type="text" placeholder="Search for your product" #filter />
-    <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+    <button class="primary" type="button" (click)="filterResults(filter.value)">
+      Search
+    </button>
   </form>
-  </section>
-  <section class="results">
-    <app-products-view *ngFor="let product of productList"
-    [product]="product" ></app-products-view>
-  </section>
-  
+</section>
+<section class="results">
+  @for (product of productList; track product.id) {
+  <app-products-view [product]="product"></app-products-view>
+  }
+  <!-- <app-products-view *ngFor="let product of productList"
+    [product]="product" ></app-products-view> -->
+</section>

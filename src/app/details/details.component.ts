@@ -9,6 +9,9 @@ import {
 } from '@angular/router';
 import { Product } from '../product';
 import { ProductServiceService } from '../product-service.service';
+import { LocalStorageService } from '../local-storage.service';
+import { CartService } from '../cart.service';
+import { Cart } from '../cart';
 
 @Component({
   selector: 'app-details',
@@ -19,8 +22,11 @@ import { ProductServiceService } from '../product-service.service';
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   service: ProductServiceService = inject(ProductServiceService);
+  cartService : CartService = inject(CartService);
+  localStorageService: LocalStorageService = inject(LocalStorageService);
   product: any = {};
   id!: number;
+  quantity : number = 1;
   constructor(private http: HttpClient, private router: Router) {
     const productId = parseInt(this.route.snapshot.params['id'], 10);
     this.getProductById(productId);
@@ -49,6 +55,21 @@ export class DetailsComponent {
         }
       });
     }
+  }
+
+
+  addToUsersCart(){
+    const userId = this.localStorageService.getItem('userId');
+   console.log(userId)
+    const cartItem: Cart = {
+      user: { id: userId as number},
+      product: { id: this.id },
+      quantity: this.quantity,
+    };
+    this.cartService.addToCart(cartItem).subscribe((res)=>{
+      console.log(res);
+      window.alert("added to cart");
+    })
   }
 
   
