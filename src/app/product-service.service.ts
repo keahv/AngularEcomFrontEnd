@@ -26,7 +26,6 @@ export class ProductServiceService {
   }
 
   deleteProduct(id: number) {
-    debugger;
     return this.http.delete(this.baseUrl + 'product/' + id);
   }
 

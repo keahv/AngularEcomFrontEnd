@@ -7,8 +7,11 @@
     </form>
   </section>
   <section class="results">
+    @if (productList.length === 0) {
+      <h2 style="text-align: center;">No Cart Items found!</h2>
+    }
     @for (product of productList; track product.id) {
-    <!-- <app-products-view [product]="product"></app-products-view> -->
+    <app-products-view [product]="product" ></app-products-view>
     }
   </section>
   

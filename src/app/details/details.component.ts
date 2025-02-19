@@ -12,6 +12,8 @@ import { ProductServiceService } from '../product-service.service';
 import { LocalStorageService } from '../local-storage.service';
 import { CartService } from '../cart.service';
 import { Cart } from '../cart';
+import { AuthServiceService } from '../auth-service.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +25,7 @@ export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   service: ProductServiceService = inject(ProductServiceService);
   cartService : CartService = inject(CartService);
+  authservice : AuthServiceService = inject(AuthServiceService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
   product: any = {};
   id!: number;
@@ -59,17 +62,24 @@ export class DetailsComponent {
 
 
   addToUsersCart(){
-    const userId = this.localStorageService.getItem('userId');
-   console.log(userId)
-    const cartItem: Cart = {
-      user: { id: userId as number},
-      product: { id: this.id },
-      quantity: this.quantity,
-    };
-    this.cartService.addToCart(cartItem).subscribe((res)=>{
-      console.log(res);
-      window.alert("added to cart");
-    })
+    const userId = this.localStorageService.getItem('userId') as number;
+    
+   
+    console.log(userId)
+          const cartItem: Cart = {
+            user: { id: userId as number},
+            product: { id: this.id },
+            quantity: this.quantity,
+          };
+          this.cartService.addToCart(cartItem).subscribe({
+            next:(res)=>{
+              console.log(res);
+              window.alert("added to cart");
+            },
+            error: (e)=>{
+              console.error(e);
+            }
+          });
   }
 
   

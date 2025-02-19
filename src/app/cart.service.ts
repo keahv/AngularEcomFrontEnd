@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Cart } from './cart';
 
 @Injectable({
@@ -11,14 +11,20 @@ readonly baseUrl = 'http://localhost:8080/api/carts';
   
     constructor(private http: HttpClient) {}
 
-    // Add product to cart
+    
   addToCart(cart: Cart): Observable<Cart> {
     return this.http.post<Cart>(`${this.baseUrl}`, cart);
   }
 
-  // Get cart items for a specific user
-  getCartByUser(userId: number): Observable<Cart[]> {
-    return this.http.get<Cart[]>(`${this.baseUrl}/${userId}`);
+  getCartByUserId(userId: number): Observable<Cart[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${userId}`).pipe(
+      map((cartsItem) => cartsItem.map((item) => item.product))
+    );
+  }
+
+  filterResults(keyword: string,userId:number){
+    const params = new HttpParams().set('keyword', keyword);
+    return this.http.get(this.baseUrl+"/search/"+userId,{params});
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container">
     <form class="form-container" [formGroup]="updateProductForm">
-      <!-- Name and Brand -->
+    
       <div class="form-row">
         <div class="form-group" >
           <label for="name">Name</label>
@@ -12,13 +12,13 @@
         </div>
       </div>
   
-      <!-- Description -->
+  
       <div class="form-group">
         <label for="description">Description</label>
         <textarea id="description" formControlName="description" rows="4" placeholder="Add product description"></textarea>
       </div>
   
-      <!-- Price and Category -->
+    
       <div class="form-row">
         <div class="form-group">
           <label for="price">Price</label>
@@ -35,7 +35,7 @@
         </div>
       </div>
   
-      <!-- Stock Quantity and Release Date -->
+      
       <div class="form-row">
         <div class="form-group">
           <label for="stockQuantity">Stock Quantity</label>
@@ -47,20 +47,19 @@
         </div>
       </div>
   
-      <!-- Image -->
+    
       <div class="form-group">
         <label for="imageUrl">Image</label>
         <input type="text" formControlName="imageUrl" id="imageUrl" />
       </div>
   
-      <!-- Product Available -->
       <div class="form-group">
         <label>
           <input type="checkbox" formControlName="productAvailable" id="productAvailable" /> Product Available
         </label>
       </div>
   
-      <!-- Submit Button -->
+    
       <button  class="submit-button"  (click)="onUpdate(id)">Submit</button>
     </form>
   </div>

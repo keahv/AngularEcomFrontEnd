@@ -16,6 +16,10 @@ export class LocalStorageService {
     return data ? (JSON.parse(data) as User) : null;
   }
 
+  getUserId(key: string): number | null {
+    const data = localStorage.getItem(key);
+    return data ? (JSON.parse(data) as number) : null;
+  }
   removeItem(key: string): void {
     localStorage.removeItem(key);
   }

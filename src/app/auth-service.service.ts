@@ -20,6 +20,9 @@ export class AuthServiceService {
       return this.http.post(this.baseUrl,user);
     }
 
+    getUserById(id:number): Observable<any> {
+      return this.http.get(this.baseUrl+"/"+id);
+    }
     updateUser(user:User): Observable<any>{
       return this.http.put(this.baseUrl,user);
     }

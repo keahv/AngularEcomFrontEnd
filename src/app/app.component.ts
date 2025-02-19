@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { ExecException } from 'child_process';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +10,12 @@ import { HomeComponent } from './home/home.component';
 })
 export class AppComponent {
   title = 'DemoFrontend';
+  constructor() {
+    try{
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userData');
+    } catch(e){
+        console.log(e);
+    }
+  }
 }
