@@ -11,11 +11,13 @@ import { ExecException } from 'child_process';
 export class AppComponent {
   title = 'DemoFrontend';
   constructor() {
-    try{
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userData');
-    } catch(e){
-        console.log(e);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userData');
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
 }
