@@ -7,17 +7,18 @@ import {
   RouterModule,
   RouterOutlet,
 } from '@angular/router';
-import { Product } from '../product';
-import { ProductServiceService } from '../product-service.service';
-import { LocalStorageService } from '../local-storage.service';
-import { CartService } from '../cart.service';
-import { Cart } from '../cart';
-import { AuthServiceService } from '../auth-service.service';
+import { Product } from '../models/product';
+
+import { LocalStorageService } from '../services/local-storage.service';
+import { CartService } from '../services/cart.service';
+import { Cart } from '../models/cart';
+import { AuthServiceService } from '../services/auth-service.service';
 import { response } from 'express';
+import { ProductServiceService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-details',
-  imports: [CommonModule, RouterOutlet, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })

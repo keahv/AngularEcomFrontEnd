@@ -1,4 +1,4 @@
-<section class="listing">
+<!-- <section class="listing">
     <img
       class="listing-photo"
       [src]="product.imageUrl"
@@ -8,6 +8,19 @@
     <h2 class="listing-heading">{{ product.name }}</h2>
     <p class="listing-location">$  {{ product.price }}, {{ product.stockQuantity }} in stocks</p>
     <a [routerLink]="['/details', product.id]">Learn More</a>
-     
-    
+  </section> -->
+
+  <section class="">
+    <div class="app-products-view">
+      <img  [src]="product.imageUrl" alt="Product Image" crossorigin/>
+      <h3>{{ product.name }}</h3>
+      <p>
+        <i class="icon fa fa-tag"></i> ${{ product.price }}
+        <i class="icon fa fa-box"></i> {{ product.stockQuantity }} in stock
+      </p>
+      <a [routerLink]="['/details', product.id]">
+        <i class="icon fa fa-info-circle"></i> Learn More
+      </a>
+    </div>
   </section>
+  

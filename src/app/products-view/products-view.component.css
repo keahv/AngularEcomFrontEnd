@@ -1,43 +1,125 @@
-.listing {
-    background: var(--accent-color);
-    border-radius: 30px;
-    padding-bottom: 30px;
-  }
-  .listing-heading {
-    color: var(--primary-color);
-    padding: 10px 20px 0 20px;
-  }
-  .listing-photo {
-    height: 250px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 30px 30px 0 0;
-  }
-  .listing-location {
-    padding: 10px 20px 20px 20px;
-  }
-  .listing-location::before {
-    content: url("/assets/location-pin.svg") / "";
-  }
-  
-  section.listing a {
-    padding-left: 20px;
-    text-decoration: none;
-    color: var(--primary-color);
-  }
-  section.listing a::after {
-    content: "\203A";
-    margin-left: 5px;
-  }
-  
-  .container{
-    display: flex;
-    justify-content: space-between;
-  }
+/* Results Section Styling */
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  justify-content: center; /* Center align single item */
+}
 
-  .btn-delete{
-    padding: 5px;
-    margin-right: 10px;
-    background-color: red;
-    border-radius: 10px;
-  }
+/* Ensure a single card doesn't take up the entire span */
+.results:only-child {
+  grid-template-columns: 1fr; /* One column if only one item */
+}
+
+/* Product Card Styling */
+.app-products-view {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #f8f8f8);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hover Effect */
+.app-products-view:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  border-color: #004aad;
+}
+
+/* Card Image */
+.app-products-view img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.app-products-view:hover img {
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Card Title */
+.app-products-view h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Price and Stock Info */
+.app-products-view p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Add Icon to Stock/Price Info */
+.app-products-view p .icon {
+  font-size: 1.2rem;
+  color: #004aad;
+}
+
+/* "Learn More" Button */
+.app-products-view a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #004aad;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-products-view a:hover {
+  background-color: #007bff;
+}
+
+/* Icons for Button */
+.app-products-view a .icon {
+  font-size: 1.1rem;
+}
+
+/* Add a Top Ribbon (Optional) */
+.app-products-view::before {
+  content: "Featured";
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 0 8px 8px 0;
+  display: none; /* Enable for special products */
+}
+
+.app-products-view:hover::before {
+  display: block;
+}
+
+/* Ensure a single item is centered and doesn't span full width */
+.results:only-child .app-products-view {
+  margin: 0 auto; /* Center the card */
+  width: 100%;
+  max-width: 400px; /* Limit the width of the single card */
+}

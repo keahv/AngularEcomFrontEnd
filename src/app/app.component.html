@@ -1,33 +1,31 @@
 <main>
   <header class="brand-header">
     <a [routerLink]="['/']" class="brand-link">
-      <img
-        class="brand-logo"
-        src="/assets/logo.svg"
-        alt="logo"
-        aria-hidden="true"
-      />
+      <!-- <img class="brand-logo" src="/assets/logo.svg" alt="logo" /> -->
+      <span class="brand-name">Home</span>
     </a>
 
     <nav class="nav-links">
-      <a [routerLink]="['/addProduct']" class="add-product-link">Add Product</a>
-    </nav>
+      @if (authService.accessRole() === 'admin' && authService.isLogin()) {
+      <a [routerLink]="['/addProduct']" class="nav-link">Add Product</a>
+      }
+      @if (!authService.isLogin()) {
+      <a [routerLink]="['/loginOrSignUp']" class="nav-link">Login/SignUp</a>
+      }
+      <a [routerLink]="['/cart']" class="nav-link cart-link">
+        <!-- <img src="/assets/cart.svg" alt="Cart" class="cart-icon" /> -->
+        <i class="fas fa-shopping-cart cart-icon"></i>
+      </a>
 
-    <nav class="nav-links" style="margin-left: 4px">
-      <a [routerLink]="['/loginOrSignUp']" class="add-product-link"
-        >login/SignUp</a
-      >
+      <div class="user-menu nav-link">
+        <i class="fas fa-user-circle user-icon" (click)="toggleDropdown()"></i>
+        <div class="dropdown-menu" [class.show]="dropdownVisible()">
+          <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
+          <a class="dropdown-item" [routerLink]="['/settings']">Settings</a>
+          @if (authService.isLogin()) { <a class="dropdown-item" (click)="logout()">Log Out</a>}
+        </div>
+      </div>
     </nav>
-
-    <a [routerLink]="['/cart']" class="add-product-link">
-      <img
-        src="/assets/cart.svg"
-        class="nav-links"
-        style="margin-left: 4px; margin-right: 5px"
-        alt="logo"
-        aria-hidden="true"
-      />
-    </a>
   </header>
 
   <section class="content">

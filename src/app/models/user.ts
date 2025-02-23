@@ -3,5 +3,6 @@ export interface User {
     userName:string,
     userEmail:string,
     password:string,
-    isActive:boolean
+    isActive:boolean,
+    accessRole:string
 }

@@ -1,5 +1,5 @@
 import { Component,Input, Output } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../models/product';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from 'stream';

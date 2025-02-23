@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../models/product';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { ProductsViewComponent } from '../products-view/products-view.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ProductServiceService } from '../product-service.service';
+import { ProductServiceService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-home',

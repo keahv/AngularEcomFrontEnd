@@ -1,28 +1,39 @@
 <div class="container">
+  <h2 class="form-title">Update New Product</h2>
     <form class="form-container" [formGroup]="updateProductForm">
     
       <div class="form-row">
         <div class="form-group" >
           <label for="name">Name</label>
           <input type="text" formControlName="name" id="name" placeholder="Product Name" />
+          <div *ngIf="updateProductForm.get('name')?.invalid && updateProductForm.get('name')?.touched">
+            Product name required.
+          </div>
         </div>
         <div class="form-group">
           <label for="brand">Brand</label>
           <input type="text" formControlName="brand" id="brand" placeholder="Enter your Brand" />
+          <div *ngIf="updateProductForm.get('brand')?.invalid && updateProductForm.get('brand')?.touched">
+             brand required.
+          </div>
         </div>
       </div>
-  
   
       <div class="form-group">
         <label for="description">Description</label>
         <textarea id="description" formControlName="description" rows="4" placeholder="Add product description"></textarea>
+        <div *ngIf="updateProductForm.get('description')?.invalid && updateProductForm.get('description')?.touched">
+          Product description required.
+        </div>
       </div>
   
-    
       <div class="form-row">
         <div class="form-group">
           <label for="price">Price</label>
           <input type="number" formControlName="price" id="price" placeholder="Eg: $1000" />
+          <p *ngIf="updateProductForm.get('price')?.invalid && updateProductForm.get('price')?.touched">
+             price value can't be empty.
+          </p>
         </div>
         <div class="form-group">
           <label for="category">Category</label>
@@ -32,28 +43,37 @@
             <option value="furniture">Furniture</option>
             <option value="clothing">Clothing</option>
           </select>
+          <div *ngIf="updateProductForm.get('category')?.invalid && updateProductForm.get('category')?.touched">
+            Product category required.
+          </div>
         </div>
       </div>
   
-      
+  
       <div class="form-row">
         <div class="form-group">
           <label for="stockQuantity">Stock Quantity</label>
           <input type="number" formControlName="stockQuantity" id="stockQuantity" placeholder="Stock Remaining" />
+          <div *ngIf="updateProductForm.get('stockQuantity')?.invalid && updateProductForm.get('stockQuantity')?.touched">
+            stock Quantity required.
+          </div>
         </div>
         <div class="form-group">
           <label for="releaseDate">Release Date</label>
           <input type="date" formControlName="releaseDate" id="releaseDate" />
+          <div *ngIf="updateProductForm.get('releaseDate')?.invalid && updateProductForm.get('releaseDate')?.touched">
+            Product description required.
+          </div>
         </div>
       </div>
   
-    
+   
       <div class="form-group">
         <label for="imageUrl">Image</label>
         <input type="text" formControlName="imageUrl" id="imageUrl" />
       </div>
   
-      <div class="form-group">
+      <div class="form-group" style="margin-top: 1rem;">
         <label>
           <input type="checkbox" formControlName="productAvailable" id="productAvailable" /> Product Available
         </label>

@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Product } from '../product';
-import { CartService } from '../cart.service';
 import { ProductsViewComponent } from '../products-view/products-view.component';
-import { LocalStorageService } from '../local-storage.service';
-import { response } from 'express';
+import { LocalStorageService } from '../services/local-storage.service';
+import { CartService } from '../services/cart.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +14,7 @@ import { response } from 'express';
 export class CartComponent implements OnInit {
   cartService = inject(CartService);
   localStorageService = inject(LocalStorageService);
+  authService = inject(AuthServiceService);
   productList: any[] = [];
   constructor() {}
 

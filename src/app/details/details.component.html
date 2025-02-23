@@ -21,6 +21,8 @@
   </section>
 
   <div class="brand-header">
+
+    @if (authservice.accessRole() === 'admin'  && authservice.isLogin()) {
     <div
       style="color: red"
       class="add-product-link"
@@ -28,7 +30,7 @@
     >
       Delete Product
     </div>
-
+  }
     <div
       class="add-product-link"
       style="
@@ -44,12 +46,15 @@
       <span style="margin-left: 8px">Add Cart</span>
     </div>
     
+    @if (authservice.accessRole() === 'admin'  && authservice.isLogin()) {
     <div class="" style="margin-left: 4px">
       <a [routerLink]="['/updateProduct', id]" class="add-product-link"
         >Update Product</a
       >
     </div>
+  }
+
   </div>
 
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet> -->
 </article>

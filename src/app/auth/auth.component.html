@@ -9,18 +9,28 @@
           Name is required
         </div>
       </div>
-  
+      
       <label for="email">Email:</label>
       <input id="email" formControlName="userEmail" type="email" />
       <div *ngIf="authForm.get('userEmail')?.invalid && authForm.get('userEmail')?.touched">
         Invalid email
       </div>
-  
+      @if (!isLoginMode && authForm.get('userEmail')?.touched && authForm.get('userEmail')?.hasError('emailAlreadyExist')) {
+        <p>email is already taken try with other.</p>
+      }  
+      
       <label for="password">Password:</label>
       <input id="password" formControlName="password" type="password" />
-      <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
-        Password must be at least 6 characters
+      @if (isLoginMode) {
+      <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched">
+        Password required.
       </div>
+     }
+     @else {
+      <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+        Password must be at least 6 characters and atleast one special character.
+      </div>
+     }
   
       <button type="submit" [disabled]="authForm.invalid">
         {{ isLoginMode ? 'Login' : 'Sign Up' }}

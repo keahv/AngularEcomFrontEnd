@@ -1,103 +1,137 @@
-/* Container styling */
+/* General Container Styling */
 .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Form styling */
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Two-column row layout */
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Form Title Styling */
+.form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004aad;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Add subtle underline for the title */
+.form-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #004aad;
+  margin: 8px auto 0;
+}
+
+/* Form Title Styling */
+.form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004aad;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Add subtle underline for the title */
+.form-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #004aad;
+  margin: 8px auto 0;
+}
+
+/* Form Container Styling */
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Row Styling */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Input and Textarea Styling */
+input,
+textarea,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #004aad;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Submit Button Styling */
+.submit-button {
+  background-color: #004aad;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #003080;
+  transform: scale(1.05);
+}
+
+.submit-button:active {
+  background-color: #001f60;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  accent-color: #004aad;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
-  
-  .form-row > div {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Group styling */
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  /* Label styling */
-  label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  /* Input, textarea, and select styling */
-  input,
-  textarea,
-  select {
-    padding: 10px 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  
-  input:focus,
-  textarea:focus,
-  select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-  }
-  
-  textarea {
-    resize: none;
-  }
-  
-  input[type="file"] {
-    padding: 0;
-  }
-  
-  /* Checkbox styling */
-  input[type="checkbox"] {
-    width: auto;
-    margin-right: 10px;
-    transform: scale(1.2);
-  }
-  
-  /* Submit button styling */
-  .submit-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.2s;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}
