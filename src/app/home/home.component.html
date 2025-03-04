@@ -7,9 +7,16 @@
   </form>
 </section>
 <section class="results">
-  @for (product of productList; track product.id) {
-  <app-products-view [product]="product"></app-products-view>
+  @defer {
+    @for (product of productList; track product.id) {
+       <app-products-view [product]="product"></app-products-view>
+    } 
+  } @placeholder (minimum 1s) {
+    <div>
+      <p-progress-spinner ariaLabel="loading" />
+  </div>
+  } @error {
+    <p>Failed to Load content! Something went wrong</p>
   }
-  <!-- <app-products-view *ngFor="let product of productList"
-    [product]="product" ></app-products-view> -->
+ 
 </section>

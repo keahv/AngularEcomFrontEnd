@@ -13,6 +13,8 @@ export class AuthServiceService {
   isLogin = signal<boolean>(false);
   accessRole =signal<'admin'|'user'>('user');
   
+  authToken = signal<string>("");
+
     constructor(private http: HttpClient) {}
 
     login(user:User): Observable<any>{
@@ -38,14 +40,6 @@ export class AuthServiceService {
       return this.http.get<any>(this.baseUrl+"/isActive/"+userId);
     }
 
-    // validateEmail(email: string){
-    //     const params = new HttpParams().set('email', email);
-    //     return this.http.get<{data: boolean}>(this.baseUrl+"/isEmailValid",{params})
-    //     .pipe(
-    //       debounceTime(300), // Add a debounce to avoid frequent API calls.
-    //       switchMap((response) => of(response.data ? null : { emailInvalid: true })) // Map the response to an error object or null.
-    //     );;
-    // }
 
     validateEmail(email: string):Observable<any>{
       const params = new HttpParams().set('email', email);

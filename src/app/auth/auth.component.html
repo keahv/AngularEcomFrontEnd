@@ -1,46 +1,46 @@
 <div class="auth-container">
-    <h2>{{ isLoginMode ? 'Login' : 'Sign Up' }}</h2>
-  
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-      <div *ngIf="!isLoginMode">
-        <label for="name">Name:</label>
-        <input id="name" formControlName="userName" type="text" />
-        <div *ngIf="authForm.get('userName')?.invalid && authForm.get('userName')?.touched" >
-          Name is required
-        </div>
+  <p-toast />
+  <h2>{{ isLoginMode ? "Login" : "Sign Up" }}</h2>
+
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="!isLoginMode">
+      <label for="name">Name:</label>
+      <input id="name" formControlName="userName" type="text" />
+      <div *ngIf="authForm.get('userName')?.invalid && authForm.get('userName')?.touched">
+        Name is required
       </div>
-      
-      <label for="email">Email:</label>
-      <input id="email" formControlName="userEmail" type="email" />
-      <div *ngIf="authForm.get('userEmail')?.invalid && authForm.get('userEmail')?.touched">
-        Invalid email
-      </div>
-      @if (!isLoginMode && authForm.get('userEmail')?.touched && authForm.get('userEmail')?.hasError('emailAlreadyExist')) {
-        <p>email is already taken try with other.</p>
-      }  
-      
-      <label for="password">Password:</label>
-      <input id="password" formControlName="password" type="password" />
-      @if (isLoginMode) {
-      <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched">
-        Password required.
-      </div>
-     }
-     @else {
-      <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
-        Password must be at least 6 characters and atleast one special character.
-      </div>
-     }
-  
-      <button type="submit" [disabled]="authForm.invalid">
-        {{ isLoginMode ? 'Login' : 'Sign Up' }}
-      </button>
-    </form>
-  
-    <div class="toggle-container">
-      <button class="switch-button" (click)="toggleMode()">
-        Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
-      </button>
     </div>
+
+    <label for="email">Email:</label>
+    <input id="email" formControlName="userEmail" type="email" />
+    <div *ngIf="authForm.get('userEmail')?.invalid && authForm.get('userEmail')?.touched">
+      Invalid email
+    </div>
+    @if (!isLoginMode && authForm.get('userEmail')?.touched &&
+    authForm.get('userEmail')?.hasError('emailAlreadyExist')) {
+    <p>email is already taken try with other.</p>
+    }
+
+    <label for="password">Password:</label>
+    <input id="password" formControlName="password" type="password" />
+    @if (isLoginMode) {
+    <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched">
+      Password required.
+    </div>
+    } @else {
+    <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+      Password must be at least 6 characters and atleast one special character.
+    </div>
+    }
+
+    <button type="submit" [disabled]="authForm.invalid">
+      {{ isLoginMode ? "Login" : "Sign Up" }}
+    </button>
+  </form>
+
+  <div class="toggle-container">
+    <button class="switch-button" (click)="toggleMode()">
+      Switch to {{ isLoginMode ? "Sign Up" : "Login" }}
+    </button>
   </div>
-  
+</div>

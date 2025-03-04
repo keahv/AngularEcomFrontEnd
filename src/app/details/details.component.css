@@ -1,4 +1,3 @@
-/* Article Container */
 article {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10,7 +9,6 @@ article {
   align-items: center;
 }
 
-/* Image Styling */
 .listing-photo {
   width: 100%;
   max-width: 400px;
@@ -19,7 +17,6 @@ article {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Product Details Section */
 .listing-description {
   display: flex;
   flex-direction: column;
@@ -39,7 +36,6 @@ article {
   font-weight: 600;
 }
 
-/* Features Section */
 .listing-features {
   grid-column: span 2;
   background-color: #fff;
@@ -84,7 +80,6 @@ ul li::before {
   top: 0;
 }
 
-/* Brand Header Section */
 .brand-header {
   display: flex;
   gap: 15px;
@@ -114,7 +109,6 @@ ul li::before {
   transform: scale(1.05);
 }
 
-/* Add to Cart Button */
 .add-product-link img {
   width: 20px;
   height: 20px;
@@ -126,7 +120,6 @@ ul li::before {
   font-weight: 600;
 }
 
-/* Delete Product Button */
 .add-product-link[style*="color: red"] {
   background-color: #ffe5e5;
   color: red;

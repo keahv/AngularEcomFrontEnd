@@ -1,19 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject ,DestroyRef} from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   ReactiveFormsModule,
   AbstractControl,
-  ValidationErrors,
   AsyncValidatorFn,
 } from '@angular/forms';
 import { AuthServiceService } from '../services/auth-service.service';
 import { Router, RouterModule } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
-import { User } from '../models/user';
-import { catchError, debounceTime, map, Observable, of } from 'rxjs';
+import { debounceTime, map, Observable } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { TokenStorageService } from '../services/token-storage.service';
 
 //custom validator to check special character
 function mustContainsSpecialChar(control: AbstractControl) {
@@ -36,17 +37,21 @@ function mustContainsSpecialChar(control: AbstractControl) {
 
 @Component({
   selector: 'app-auth',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule,ToastModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
+  providers:[MessageService],
 })
 export class AuthComponent {
   isLoginMode = true;
   private authService = inject(AuthServiceService);
+  private destroyRef = inject(DestroyRef);
+  private msgService = inject(MessageService);
 
   constructor(
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private tokenStorage: TokenStorageService
   ) {}
 
   authForm: FormGroup = new FormGroup({
@@ -89,26 +94,35 @@ export class AuthComponent {
     const subscribe =  this.authService.login(formData).subscribe({
         next: (response) => {
           if (response.status) {
-            this.localStorageService.setItem('userData', response.data);
+            // this.localStorageService.setItem('userData', response.data);
             this.localStorageService.setItem('userId', response.data.id);
             console.log('Login successful:', response);
             this.authService.isLogin.set(true);
             this.authService.accessRole.set(response.data.accessRole);
-            alert('login Successful');
+            this.tokenStorage.saveToken(response.data);
+            this.authService.authToken.set(response.token);
+            // this.tokenStorage.saveUser(data);
+            // alert('login Successful');
             this.router.navigate(['/']);
+          }else {
+            this.msgService.add({ severity: 'error', summary: 'Error', detail: 'Wrong Credentials' });
           }
         },
         error: (err) => {
           console.error('Login error:', err);
-          alert('Wrong Credentials');
+          this.msgService.add({ severity: 'error', summary: 'Error', detail: 'Oops, something went wrong' });
         },
       });
+
+     this.destroyRef.onDestroy(()=>{
+      subscribe.unsubscribe();
+     });
     } else {
-      this.authService.signUp(formData).subscribe({
+      const subscribe = this.authService.signUp(formData).subscribe({
         next: (response) => {
           console.log('Sign-Up successful:', response);
-          this.localStorageService.setItem('userData', response);
-          this.localStorageService.setItem('userId', response.id);
+          this.localStorageService.setItem('userData', response.data);
+          this.localStorageService.setItem('userId', response.data.id);
           const user = this.localStorageService.getItem('userData');
           this.authService.isLogin.set(true);
           console.log(user);
@@ -120,13 +134,17 @@ export class AuthComponent {
           alert('Somthing went wrong');
         },
       });
+      this.destroyRef.onDestroy(()=>{
+        subscribe.unsubscribe();
+       })
     }
   }
 
+  //async validator for unique email
   asyncEmailValidator(): AsyncValidatorFn {
     return (control: any): Observable<{ [key: string]: boolean } | null> => {
       return this.authService.validateEmail(control.value).pipe(
-        debounceTime(5000),
+        debounceTime(500),
         map((resp: any) => {
           if (!resp.data) {
             return { emailAlreadyExist: true };

@@ -1,11 +1,9 @@
-/* Section Styling */
 section {
   margin: 20px auto;
   max-width: 1200px;
   text-align: center;
 }
 
-/* Centering the Search Bar */
 form {
   display: flex;
   justify-content: center;
@@ -44,7 +42,6 @@ form button:hover {
   background-color: #007bff;
 }
 
-/* Product Cards Styling */
 .results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -66,7 +63,6 @@ form button:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Card Content */
 .app-products-view img {
   width: 100%;
   border-radius: 8px;
@@ -85,7 +81,6 @@ form button:hover {
   margin-bottom: 12px;
 }
 
-/* "Learn More" Link */
 .app-products-view a {
   text-decoration: none;
   color: #004aad;

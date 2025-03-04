@@ -1,20 +1,21 @@
 <section>
-    <form>
-      <input type="text" placeholder="Search your product in cart" #filter />
-      <button class="primary" type="button" (click)="filterResults(filter.value)">
-        Search
-      </button>
-    </form>
-  </section>
-  <section class="results">
-    @if (!authService.isLogin()) {
-      <h2 style="text-align: center;">Please SignUp or Login to access cart!</h2>
-    }
-    @if (authService.isLogin() && productList.length === 0) {
-      <h2 style="text-align: center;">No cart item Found!</h2>
-    }
+  <form>
+    <input type="text" placeholder="Search your product in cart" #filter />
+    <button class="primary" type="button" (click)="filterResults(filter.value)">
+      Search
+    </button>
+  </form>
+</section>
+<section class="results">
+  @if (!authService.isLogin()) {
+  <h2 style="text-align: center">Please SignUp or Login to access cart!</h2>
+  } 
+  @if (authService.isLogin() && productList.length === 0) {
+  <h2 style="text-align: center">No cart item Found!</h2>
+  }
+  @if (authService.isLogin()) { 
     @for (product of productList; track product.id) {
-    <app-products-view [product]="product" ></app-products-view>
+     <app-products-view [product]="product"></app-products-view>
     }
-  </section>
-  
+  }
+</section>
